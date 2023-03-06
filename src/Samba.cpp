@@ -662,7 +662,7 @@ Samba::writeBuffer(uint32_t src_addr, uint32_t dst_addr, uint32_t size)
     int l = snprintf((char*) cmd, sizeof(cmd), "Y%08X,0#", src_addr);
     if (_port->write(cmd, l) != l)
         throw SambaError();
-    _port->timeout(TIMEOUT_QUICK);
+    _port->timeout(TIMEOUT_NORMAL);
     cmd[0] = 0;
     _port->read(cmd, 3); // Expects "Y\n\r"
     _port->timeout(TIMEOUT_NORMAL);
