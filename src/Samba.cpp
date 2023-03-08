@@ -151,7 +151,7 @@ Samba::connect(SerialPort::Ptr port, int bps)
     _isUsb = _port->isUsb();
     if (_isUsb)
     {
-        if (_port->open(921600) && init())
+        if (_port->open(230400) && init())
         {
             if (_debug)
                 printf("Connected at 921600 baud\n");
