@@ -73,7 +73,11 @@ public:
 
     virtual std::string name() const { return _name; }
 
+#ifdef ARDUINO
+    typedef std::auto_ptr<SerialPort> Ptr;
+#else
     typedef std::unique_ptr<SerialPort> Ptr;
+#endif
 
 protected:
     std::string _name;
