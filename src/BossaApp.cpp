@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "BossaApp.h"
 
 BossaApp::BossaApp() : config(_("Bossa")), device(samba)
@@ -44,3 +45,4 @@ BossaApp::OnInit()
 }
 
 IMPLEMENT_APP(BossaApp)
+#endif

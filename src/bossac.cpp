@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include <string>
 #include <exception>
 #include <string.h>
@@ -498,4 +499,4 @@ main(int argc, char* argv[])
 
     return 0;
 }
-
+#endif

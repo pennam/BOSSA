@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "BossaInfo.h"
 #include "BossaApp.h"
 
@@ -67,3 +68,4 @@ BossaInfo::BossaInfo(wxWindow* parent) : InfoDialog(parent)
 
     GetSizer()->Fit(this);
 }
+#endif

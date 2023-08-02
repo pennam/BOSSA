@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "BossaProgress.h"
 
 DEFINE_LOCAL_EVENT_TYPE(wxEVT_PROGRESS_CANCEL)
@@ -63,3 +64,4 @@ BossaProgress::OnCancel(wxCommandEvent& event)
     wxCommandEvent cmd(wxEVT_PROGRESS_CANCEL);
     _parent->AddPendingEvent(cmd);
 }
+#endif

@@ -4,7 +4,7 @@
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
-
+#ifndef ARDUINO
 #include "BossaForm.h"
 
 ///////////////////////////////////////////////////////////////////////////
@@ -463,3 +463,4 @@ InfoDialog::InfoDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 InfoDialog::~InfoDialog()
 {
 }
+#endif

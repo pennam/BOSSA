@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "WinSerialPort.h"
 
 #include <string.h>
@@ -269,3 +270,4 @@ WinSerialPort::setRTS(bool rts)
 
     EscapeCommFunction(_handle, rts ? SETRTS : CLRRTS);
 }
+#endif

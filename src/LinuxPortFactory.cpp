@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "LinuxPortFactory.h"
 #include "PosixSerialPort.h"
 
@@ -106,4 +107,4 @@ LinuxPortFactory::def()
 {
     return std::string("/dev/ttyACM0");
 }
-
+#endif

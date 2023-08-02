@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include <stdlib.h>
 #include <getopt.h>
 #include <string.h>
@@ -157,3 +158,4 @@ CmdOpts::find(char letter)
 
     return optIdx;
 }
+#endif

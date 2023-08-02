@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "BossaBitmaps.h"
 
 #include <wx/mstream.h>
@@ -52,5 +53,5 @@ BossaBitmaps::GetBitmapFromMemory(const unsigned char *data, int length)
     wxMemoryInputStream is(data, length);
     return wxBitmap(wxImage(is, wxBITMAP_TYPE_ANY, -1), -1);
 }
-
+#endif
 

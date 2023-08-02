@@ -26,6 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ARDUINO
 #include "PosixSerialPort.h"
 
 #include <string.h>
@@ -333,3 +334,4 @@ PosixSerialPort::setAutoFlush(bool autoflush)
 {
     _autoFlush = autoflush;
 }
+#endif
