@@ -21,15 +21,19 @@
 #define _BOSSAA_H
 
 #include "SerialPort.h"
+#include <HardwareSerial.h>
 
 class BossacSerialPort : public SerialPort {
     public:
-        BossacSerialPort(const std::string& name) : SerialPort(name) {
+        BossacSerialPort(const std::string& name, HardwareSerial& serial)
+        : SerialPort(name)
+        , _serial{&serial}
+        {
 
         }
 
         bool open(int baud, int data, Parity parity, StopBit stop) {
-            Serial.begin(baud, SERIAL_8N1, 44, 43);
+            _serial->begin(baud);
             return true;
         }
 
@@ -50,32 +54,32 @@ class BossacSerialPort : public SerialPort {
         }
 
         int read(uint8_t* data, int size) {
-            const int n = Serial.readBytes(data,size);
+            const int n = _serial->readBytes(data,size);
             return n;
         }
 
         int write(const uint8_t* data, int size) {
-            const int n = Serial.write(data,size);
+            const int n = _serial->write(data,size);
             return n;
         }
 
         int get() {
-            int c = Serial.read();
+            int c = _serial->read();
             return c;
         }
 
         int put(int c) {
-            Serial.write(c);
-            Serial.flush();
+            _serial->write(c);
+            _serial->flush();
         }
 
         bool timeout(int millisecs) {
-            Serial.setTimeout(millisecs);
+            _serial->setTimeout(millisecs);
             return true;
         }
 
         void flush() {
-            Serial.flush();
+            _serial->flush();
         }
 
         void setDTR(bool dtr) {
@@ -85,11 +89,14 @@ class BossacSerialPort : public SerialPort {
         void setRTS(bool rts) {
 
         }
+
+    private:
+    HardwareSerial* _serial;
 };
 
 
 class BOSSA {
     public:
-        static void flash(const char* firmware, SerialPort::Ptr port);
+        static int flash(const char* firmware, HardwareSerial& serial);
 };
 #endif

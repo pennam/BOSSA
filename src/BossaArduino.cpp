@@ -76,39 +76,38 @@ BossaObserver::onProgress(int num, int div)
     _lastTicks = 0;
 }
 
-void BOSSA::flash(const char* firmware, SerialPort::Ptr port) {
-
+int BOSSA::flash(const char* firmware, HardwareSerial& serial) {
     Samba samba;
-    // To enable debug print change debug level in UNOR4USBBridge.ino Sketch using
-    // Debug.setDebugLevel( ... )
+    SerialPort::Ptr port(new BossacSerialPort("bossac", serial));
+
+    // To enable/disable debug print change debug level in
+    // main Sketch using Debug.setDebugLevel( ... )
     samba.setDebug(true);
 
     Debug.newlineOff();
-    DEBUG_ERROR("Connecting to SAM-BA ... ");
-    if(samba.connect(port, 230400)) {
-        Debug.newlineOn();
-        DEBUG_ERROR("Done!");
-
-        Device device(samba);
-        device.create();
-
-        Device::FlashPtr& flash = device.getFlash();
-			
-        if (flash.get() == NULL) {
-            DEBUG_ERROR("Flash is not supported\n");
-            return;
-        } else {
-            DEBUG_ERROR("Found Flash %s\n", flash->name().c_str());
-        }
-
-        std::string region;
-        BossaObserver observer;
-        Flasher flasher(samba, device, observer);
-        flasher.erase(0);
-        flasher.write(firmware);
-    } else {
-        Debug.newlineOn();
-        DEBUG_ERROR("Failed!");
+    DEBUG_INFO("Connecting to SAM-BA ... ");
+    Debug.newlineOn();
+    if(!samba.connect(port, 230400)) {
+        DEBUG_INFO("Failed!");
+        return 0;
     }
-}
+    DEBUG_INFO("Done!");
 
+    Device device(samba);
+    device.create();
+
+    Device::FlashPtr& flash = device.getFlash();
+    if (flash.get() == NULL) {
+        DEBUG_INFO("Flash is not supported\n");
+        return 0;
+    } else {
+        DEBUG_INFO("Found Flash %s\n", flash->name().c_str());
+    }
+
+    std::string region;
+    BossaObserver observer;
+    Flasher flasher(samba, device, observer);
+    flasher.erase(0);
+    flasher.write(firmware);
+    return 1;
+}
