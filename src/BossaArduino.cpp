@@ -108,6 +108,7 @@ int BOSSA::flash(const char* file_path, HardwareSerial& serial) {
     BossaObserver observer;
     Flasher flasher(samba, device, observer);
     flasher.erase(0);
+    delay(100);
     flasher.write(file_path);
     return 1;
 }
