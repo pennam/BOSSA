@@ -98,5 +98,6 @@ class BossacSerialPort : public SerialPort {
 class BOSSA {
     public:
         static int flash(const char* file_path, HardwareSerial& serial);
+        static int flashUnoR4WiFi(const char* file_path, HardwareSerial& serial, int boot, int reset);
 };
 #endif

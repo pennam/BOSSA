@@ -23,7 +23,7 @@
 #include <stdlib.h>
 
 #include <Arduino_DebugUtils.h>
-
+#include <SPIFFS.h>
 #include "Samba.h"
 
 #include "Flasher.h"
@@ -111,4 +111,37 @@ int BOSSA::flash(const char* file_path, HardwareSerial& serial) {
     delay(100);
     flasher.write(file_path);
     return 1;
+}
+
+int BOSSA::flashUnoR4WiFi(const char* file_path, HardwareSerial& serial, int boot, int reset) {
+    int ret = 0;
+
+    SPIFFS.begin();
+    if(SPIFFS.exists(file_path)) {
+      String spiffs_path = String("/spiffs") + String(file_path);
+
+      digitalWrite(boot, HIGH);
+      digitalWrite(reset, LOW);
+      delay(100);
+      digitalWrite(reset, HIGH);
+      delay(100);
+      digitalWrite(reset, LOW);
+      delay(100);
+      digitalWrite(reset, HIGH);
+
+      delay(500);
+      uint32_t baud = serial.baudRate();
+      ret = flash(spiffs_path.c_str(), serial);
+      serial.begin(baud);
+      SPIFFS.remove(file_path);
+
+      digitalWrite(reset, LOW);
+      delay(100);
+      digitalWrite(reset, HIGH);
+    }
+    SPIFFS.end();
+
+
+
+    return ret;
 }
