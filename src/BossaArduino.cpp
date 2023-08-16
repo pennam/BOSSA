@@ -76,7 +76,7 @@ BossaObserver::onProgress(int num, int div)
     _lastTicks = 0;
 }
 
-int BOSSA::flash(const char* firmware, HardwareSerial& serial) {
+int BOSSA::flash(const char* file_path, HardwareSerial& serial) {
     Samba samba;
     SerialPort::Ptr port(new BossacSerialPort("bossac", serial));
 
@@ -108,6 +108,6 @@ int BOSSA::flash(const char* firmware, HardwareSerial& serial) {
     BossaObserver observer;
     Flasher flasher(samba, device, observer);
     flasher.erase(0);
-    flasher.write(firmware);
+    flasher.write(file_path);
     return 1;
 }
